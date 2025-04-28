@@ -34,7 +34,7 @@ echo Current: %CURRENT%
 
 :LATEST
 
-set LATEST_URL="https://github.com/oxen-io/session-desktop/releases/latest"
+set LATEST_URL="https://github.com/session-foundation/session-desktop/releases/latest"
 
 %BUSYBOX% wget -q -O - %LATEST_URL% | %BUSYBOX% grep -o tag/v[0-9.]\+[0-9] | %BUSYBOX% cut -d "v" -f2 > latest.txt
 
@@ -74,7 +74,7 @@ for /f %%P in ('tasklist /NH /FI "IMAGENAME eq Session.exe"') do if %%P == Sessi
 if exist "TMP" rmdir "TMP" /s /q
 mkdir "TMP"
 
-set SESSION="https://github.com/oxen-io/session-desktop/releases/download/v%LATEST%/session-desktop-win-x64-%LATEST%.exe"
+set SESSION="https://github.com/session-foundation/session-desktop/releases/download/v%LATEST%/session-desktop-win-x64-%LATEST%.exe"
 
 %BUSYBOX% wget %SESSION% -O TMP\Session_%LATEST%.exe
 
