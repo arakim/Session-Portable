@@ -22,12 +22,7 @@ if "%ERRORLEVEL%" == "1" (
 
 :::::: VERSION CHECK
 
-if not exist "%WINDIR%\system32\wbem\wmic.exe" goto LATEST
-
-wmic datafile where name='%HERE_DS%App\\Session\\Session.exe' get version | %BUSYBOX% tail -n2 ^
- | %BUSYBOX% rev ^
- | %BUSYBOX% cut -c 6- ^
- | %BUSYBOX% rev > current.txt
+powershell -NoProfile -Command "[IO.File]::WriteAllText('current.txt', (Get-Item '%HERE_DS%App\Session\Session.exe').VersionInfo.FileVersion, (New-Object Text.UTF8Encoding($false)))"
 
 for /f %%V in ('more current.txt') do (set CURRENT=%%V)
 echo Current: %CURRENT%
@@ -104,5 +99,3 @@ echo DisplayVersion=%LATEST% >> "App\AppInfo\AppInfo.ini"
 
 echo:
 echo Done
-
-pause
